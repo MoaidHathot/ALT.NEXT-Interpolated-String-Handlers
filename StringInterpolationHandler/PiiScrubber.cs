@@ -7,6 +7,7 @@ internal partial class PiiScrubber
     private const string IpV6WithIpv4AddressRegex = @$"(?:{IpV6AddressBitsRegex}{{0,4}}:|::){{1,6}}{IpV4AddressRegex}";
     private const string IpV6AddressRegex = $"(?:{IpV6AddressBitsRegex}{{0,4}}:|::){{1,7}}{IpV6AddressBitsRegex}{{1,4}}";
     private const string IpV6WithIpv4CombinedRegex = $"{IpV6WithIpv4AddressRegex}|{IpV6AddressRegex}|{IpV4AddressRegex}";
+
     private const string EmailAddressRegex = "([a-zA-Z0-9'_-]\\.?)*[a-zA-Z0-9'_-]+@[a-zA-Z0-9.-]{1,}\\.[a-zA-Z]{2,}";
 
     private const int RegexMatchTimeoutInMilliseconds = 1000;
@@ -23,6 +24,7 @@ internal partial class PiiScrubber
         {
             return message;
         }
+
         foreach (var scrubbingRegex in s_piiRegexs)
         {
             message = Scrube(scrubbingRegex, message);

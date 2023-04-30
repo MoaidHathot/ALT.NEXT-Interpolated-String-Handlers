@@ -1,5 +1,6 @@
 using Dumpify;
 using Microsoft.Extensions.Logging;
+using System.Runtime.CompilerServices;
 
 public class Logger
 {
@@ -17,6 +18,15 @@ public class Logger
     {
         if(IsEnabled(level))
         {
+            Output(message);
+        }
+    }
+
+    public void Log(LogLevel level, [InterpolatedStringHandlerArgument("", nameof(level))] LoggerInterpolationHanlder handler)
+    {
+        if(IsEnabled(level))
+        {
+            var message = handler.GetLoggingString();
             Output(message);
         }
     }
