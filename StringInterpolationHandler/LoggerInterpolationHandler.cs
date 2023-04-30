@@ -10,19 +10,24 @@ public class LoggerInterpolationHanlder
     public LoggerInterpolationHanlder(int literalLength, int formattedCount)
     {
         _builder = new StringBuilder(literalLength);
-        $"\tliteral length: {literalLength}, formattedCount: {formattedCount}".Dump();
+        $"Literal length: {literalLength}, formattedCount: {formattedCount}".Dump();
     }
 
     public void AppendLiteral(string s)
     {
-        _builder.Append(s);
-        "Appended the literal string".Dump();
+        AppendLog(s);
+        $"Appended literal '{s}'".Dump();
     }
 
     public void AppendFormatted<T>(T t)
     {
-        _builder.Append(t?.ToString());
-        "Appended the formatted object".Dump();
+        AppendLog(t?.ToString());
+        $"Appended formatted '{t}' of type '{typeof(T)}'".Dump();
+    }
+
+    private void AppendLog(string? log)
+    {
+        _builder.Append(log);
     }
 
     internal string GetLoggingString() => _builder.ToString();
