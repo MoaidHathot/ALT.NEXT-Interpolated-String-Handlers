@@ -3,9 +3,10 @@ using Microsoft.Extensions.Logging;
 
 var logger = new Logger(Microsoft.Extensions.Logging.LogLevel.Information);
 
-var name = "example@example.com";
-var age = 34;
+var firstName = "Moaid";
+var lastName = "Hathot";
 
-logger.Log(LogLevel.Information, $"{name}  age: {(true, "sdfdsf")}");
+var email = "moaid.hathot@outlook.com";
 
+logger.Log(LogLevel.Information, $"FirstName: '{firstName}', lastName: '{lastName}', email: '{email}'");
 

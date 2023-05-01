@@ -22,6 +22,14 @@ public class Logger
         }
     }
 
+    public void Log(LogLevel level, string message)
+    {
+        if(IsEnabled(level))
+        {
+            Output(message);
+        }
+    }
+
     private void Output(string message)
         => message.Dump();
 }

@@ -19,22 +19,24 @@ public ref struct LoggerInterpolationHanlder
 
     public bool AppendLiteral(string s)
     {
-        "3242389473294".Dump();
         if(_isEnabled is false)
         {
             return false;
         }
+
         AppendLog(s);
         $"Appended literal '{s}'".Dump();
          return true;
     }
+
     public bool AppendFormatted<T>((bool pii, T item) t)
     {
         if(_isEnabled is not true)
         {
             return false;
         }
-        AppendLog(t.item?.ToString());
+
+        AppendLog(t.item?.ToString());        
         $"Appended formatted '{t}' of type '{typeof(T)}'".Dump();
 
         return true;
@@ -46,12 +48,12 @@ public ref struct LoggerInterpolationHanlder
         {
             return false;
         }
+
         AppendLog(t?.ToString());
         $"Appended formatted '{t}' of type '{typeof(T)}'".Dump();
 
         return true;
     }
-
 
     private void AppendLog(string? log)
     {
