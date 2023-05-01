@@ -11,9 +11,10 @@ public class LoggerInterpolationHanlder
     private readonly bool _enabled;
     private readonly PiiScrubber _scrubber = new PiiScrubber();
 
-    public LoggerInterpolationHanlder(int literalLength, int formattedCount, Logger logger, LogLevel logLevel)
+    public LoggerInterpolationHanlder(int literalLength, int formattedCount, Logger logger, LogLevel logLevel, out bool enabled)
     {
         _enabled = logger.IsEnabled(logLevel);
+        enabled = _enabled;
 
         _scrubbedBuilder = new StringBuilder(literalLength);
         _nonScrubbedBuilder = new StringBuilder(literalLength);
@@ -53,7 +54,7 @@ public class LoggerInterpolationHanlder
 
     public bool AppendFormatted<T>((bool pii, T item) pair)
     {
-        if (_enabled is false)
+        if (_enabled is not true)
         {
             return false;
         }
